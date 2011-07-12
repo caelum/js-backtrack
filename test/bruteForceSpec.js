@@ -48,6 +48,16 @@ Screw.Unit(function() {
             expect(result).to(contains_same_elements, [[{value:6}], [{value:1},{value:5}], [{value:2},{value:4}], [{value:1},{value:3},{value:2}]]);
         });
         
+        it("always increments the percentage and finishes with 100%", function() {
+            var last_percentage = 0;
+            var percentage_assertion = function(val) {
+                expect(last_percentage).to(less_or_equal, val);
+                last_percentage = val;
+            }
+            var result = bruteforce([{value: 1}, {value: 2}, {value: 3}, {value: 4}, {value: 5}, {value: 6}], 6, default_extractor, percentage_assertion);
+            expect(last_percentage).to(equal, 100);
+        });
+        
         it("Big Test", function () {
             var result = bruteforce([{value: 100}, {value: 300}, {value: 200}, {value: 350}, {value: 120}, {value: 500}], 450, default_extractor, percent);
             expect(result).to(contains_same_elements, [[{value: 350}, {value: 100}]]);

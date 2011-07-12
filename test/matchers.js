@@ -43,3 +43,13 @@ var contains_same_elements = {
         }
 };
 
+var less_or_equal = {
+    match: function(expected, actual) {
+        return actual <= expected;
+    },
+    
+    failure_message: function (expected, actual, not) {
+        return "expected " + $.print(actual) + (not ? ' to be greater ' : ' to be less or equal ') + $.print(expected);;
+    }
+};
+
